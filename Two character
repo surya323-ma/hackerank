@@ -19,3 +19,41 @@ Input Format
 The first line contains a single integer that denotes the length of s.
 The second line contains string s.
 
+
+
+CODE python 3
+
+
+def alternate(s):
+    max_pattern = 0
+    
+    if len(s) == 1:  
+        return max_pattern
+    
+    for i in range(26):
+        for j in range(i + 1, 26):
+            one = chr(ord('a') + i)  
+            two = chr(ord('a') + j)  
+            last_seen = None
+            pattern_length = 0
+            
+            for letter in s:
+                if letter == one or letter == two:
+                    if letter == last_seen: 
+                        pattern_length = 0
+                        break
+                    
+                    pattern_length += 1
+                    last_seen = letter
+            max_pattern = max(max_pattern, pattern_length)
+    
+    return max_pattern
+
+
+if __name__ == '__main__':
+    # Read input length (not used directly, kept for consistency)
+    l = int(input().strip())
+    s = input().strip()
+
+    result = alternate(s)
+    print(result)
