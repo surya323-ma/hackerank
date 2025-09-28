@@ -1,0 +1,37 @@
+Given an integer n,  return the nth ugly number.
+
+An ugly number is a positive integer whose prime factors are limited to 2, 3 and 5.
+
+Examples:
+
+Input: n = 5
+Output: 5
+Explanation: Ugly Numbers - 1, 2, 3, 4, 5, 6, 8, 9, 10, 12. So, 5th Ugly Number is 5
+Input: n = 10
+Output: 12
+Explanation: 10th Ugly Number is 12
+Constraints:
+1 ≤ n ≤ 1500
+class Solution:
+    # Function to find the nth ugly number.
+    def uglyNumber(self, n):
+        arr = [0] * n
+        ind2 = ind3 = ind5 = 0
+        mulTwo = 2
+        mulThree = 3
+        mulFive = 5
+        nextNum = 1
+        arr[0] = 1
+        for i in range(1, n):
+            nextNum = min(mulTwo, mulThree, mulFive)
+            arr[i] = nextNum
+            if nextNum == mulTwo:
+                ind2 += 1
+                mulTwo = arr[ind2] * 2
+            if nextNum == mulThree:
+                ind3 += 1
+                mulThree = arr[ind3] * 3
+            if nextNum == mulFive:
+                ind5 += 1
+                mulFive = arr[ind5] * 5
+        return nextNum
